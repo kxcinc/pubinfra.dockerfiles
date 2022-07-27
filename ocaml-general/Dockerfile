@@ -11,7 +11,6 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
   git \
   nodejs \
   pkg-config \
-  rsync \
   yarn \
   && rm -rf /var/lib/apt/lists/*
 
