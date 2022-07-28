@@ -23,7 +23,10 @@ RUN groupadd -r $USERNAME && useradd -r -m -g $USERNAME $USERNAME
 USER $USERNAME
 WORKDIR /home/$USERNAME
 
-RUN opam init --auto-setup --yes --disable-sandboxing
+ARG VER=4.12.1
+RUN opam init --auto-setup --yes --bare --disable-sandboxing
+RUN opam switch create $VER
+RUN opam install --yes merlin dune
 
 ENV DEBIAN_FRONTEND=$DEBIAN_FRONTEND_OLD
 
