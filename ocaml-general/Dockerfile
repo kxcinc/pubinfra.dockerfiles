@@ -9,10 +9,14 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
   cmake \
   curl \
   git \
-  nodejs \
+  npm \
   pkg-config \
   yarn \
   && rm -rf /var/lib/apt/lists/*
+
+RUN npm install n -g && \
+    n latest && \
+    apt-get purge -y npm
 
 RUN apt-get update && apt-get install -y \
   opam \
@@ -26,7 +30,21 @@ WORKDIR /home/$USERNAME
 ARG VER=4.12.1
 RUN opam init --auto-setup --yes --bare --disable-sandboxing
 RUN opam switch create $VER
-RUN opam install --yes merlin dune
+RUN opam install --yes \
+  dune.3.4.0 \
+  merlin \
+  odoc.2.1.1 \
+  ppxlib.0.26.0 \
+  ppx_deriving.5.2.1 \
+  js_of_ocaml.4.0.0 js_of_ocaml-ppx.4.0.0 \
+  sexplib.v0.15.0 ppx_sexp_conv.v0.15.1 \
+  yojson.1.7.0 ppx_yojson_conv.v0.15.0 \
+  jsonm.1.0.1 \
+  ppx_optcomp.v0.15.0 \
+  brr.0.0.3 \
+  zed.3.2.0 \
+  ppx_inline_test.v0.15.0 \
+  alcotest.1.6.0
 
 ENV DEBIAN_FRONTEND=$DEBIAN_FRONTEND_OLD
 
