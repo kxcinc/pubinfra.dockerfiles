@@ -10,17 +10,16 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
   curl \
   git \
   npm \
-  pkg-config \
-  yarn \
-  && rm -rf /var/lib/apt/lists/*
+  pkg-config
 
 RUN npm install n -g && \
     n latest && \
     apt-get purge -y npm
 
+RUN npm install yarn -g
+
 RUN apt-get update && apt-get install -y \
-  opam \
-  && rm -rf /var/lib/apt/lists/*
+  opam
 
 ARG USERNAME=ocaml-general
 RUN groupadd -r $USERNAME && useradd -r -m -g $USERNAME $USERNAME
