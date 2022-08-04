@@ -1,0 +1,51 @@
+FROM ubuntu:22.04
+
+ENV DEBIAN_FRONTEND_OLD=$DEBIAN_FRONTEND
+ENV DEBIAN_FRONTEND=noninteractive
+
+RUN apt-get update && apt-get install -y --no-install-recommends \
+  build-essential \
+  clang \
+  cmake \
+  curl \
+  git \
+  npm \
+  pkg-config
+
+RUN npm install n -g && \
+    n latest && \
+    apt-get purge -y npm
+
+RUN npm install yarn -g
+
+RUN apt-get update && apt-get install -y \
+  opam
+
+ARG USERNAME=ocaml-general
+RUN groupadd -r $USERNAME && useradd -r -m -g $USERNAME $USERNAME
+USER $USERNAME
+WORKDIR /home/$USERNAME
+
+ARG VER=4.12.1
+RUN opam init --auto-setup --yes --bare --disable-sandboxing
+RUN opam switch create $VER
+RUN opam install --yes \
+  dune.3.4.0 \
+  merlin \
+  odoc.2.1.1 \
+  ppxlib.0.26.0 \
+  ppx_deriving.5.2.1 \
+  js_of_ocaml.4.0.0 js_of_ocaml-ppx.4.0.0 \
+  sexplib.v0.15.0 ppx_sexp_conv.v0.15.1 \
+  yojson.1.7.0 ppx_yojson_conv.v0.15.0 \
+  jsonm.1.0.1 \
+  ppx_optcomp.v0.15.0 \
+  brr.0.0.3 \
+  zed.3.2.0 \
+  ppx_inline_test.v0.15.0 \
+  alcotest.1.6.0
+
+ENV DEBIAN_FRONTEND=$DEBIAN_FRONTEND_OLD
+
+ENTRYPOINT ["/usr/bin/opam", "exec", "--"]
+CMD ["/usr/bin/bash"]
