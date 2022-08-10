@@ -21,11 +21,6 @@ RUN npm install yarn -g
 RUN apt-get update && apt-get install -y \
   opam
 
-ARG USERNAME=ocaml-general
-RUN groupadd -r $USERNAME && useradd -r -m -g $USERNAME $USERNAME
-USER $USERNAME
-WORKDIR /home/$USERNAME
-
 ARG VER=4.12.1
 RUN opam init --auto-setup --yes --bare --disable-sandboxing
 RUN opam switch create $VER
@@ -46,6 +41,8 @@ RUN opam install --yes \
   alcotest.1.6.0
 
 ENV DEBIAN_FRONTEND=$DEBIAN_FRONTEND_OLD
+ENV OPAMROOT=/root/.opam
+ENV OPAMROOTISOK=1
 
 ENTRYPOINT ["/usr/bin/opam", "exec", "--"]
 CMD ["/usr/bin/bash"]
