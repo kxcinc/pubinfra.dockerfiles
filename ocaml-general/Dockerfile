@@ -38,7 +38,9 @@ RUN opam install --yes \
   brr.0.0.3 \
   zed.3.2.0 \
   ppx_inline_test.v0.15.0 \
-  alcotest.1.6.0
+  alcotest.1.6.0 \
+  qcheck.0.19.1 \
+  qcheck-alcotest.0.19.1
 
 ENV DEBIAN_FRONTEND=$DEBIAN_FRONTEND_OLD
 ENV OPAMROOT=/root/.opam
