@@ -40,6 +40,7 @@ RUN opam install --yes \
   brr.0.0.3 \
   prr.0.1.1 \
   zed.3.2.0 \
+  tezt.3.0.0 \
   ppx_inline_test.v0.15.0 \
   alcotest.1.6.0 \
   qcheck.0.19.1 \
