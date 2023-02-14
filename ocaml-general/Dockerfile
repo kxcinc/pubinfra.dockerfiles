@@ -38,6 +38,7 @@ RUN opam install --yes \
   jsonm.1.0.1 \
   ppx_optcomp.v0.15.0 \
   brr.0.0.3 \
+  prr.0.1.1 \
   zed.3.2.0 \
   ppx_inline_test.v0.15.0 \
   alcotest.1.6.0 \
