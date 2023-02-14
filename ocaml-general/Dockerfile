@@ -10,7 +10,9 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
   curl \
   git \
   npm \
-  pkg-config
+  git-lfs \
+  pkg-config \
+  && rm -rf /var/lib/apt/lists/*
 
 RUN npm install n -g && \
     n latest && \
