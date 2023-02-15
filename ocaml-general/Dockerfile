@@ -10,7 +10,9 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
   curl \
   git \
   npm \
-  pkg-config
+  git-lfs \
+  pkg-config \
+  && rm -rf /var/lib/apt/lists/*
 
 RUN npm install n -g && \
     n latest && \
@@ -30,13 +32,15 @@ RUN opam install --yes \
   odoc.2.1.1 \
   ppxlib.0.26.0 \
   ppx_deriving.5.2.1 \
-  js_of_ocaml.4.0.0 js_of_ocaml-ppx.4.0.0 \
+  js_of_ocaml.4.1.0 js_of_ocaml-ppx.4.1.0 \
   sexplib.v0.15.0 ppx_sexp_conv.v0.15.1 \
   yojson.1.7.0 ppx_yojson_conv.v0.15.0 \
   jsonm.1.0.1 \
   ppx_optcomp.v0.15.0 \
   brr.0.0.3 \
+  prr.0.1.1 \
   zed.3.2.0 \
+  tezt.3.0.0 \
   ppx_inline_test.v0.15.0 \
   alcotest.1.6.0 \
   qcheck.0.19.1 \
