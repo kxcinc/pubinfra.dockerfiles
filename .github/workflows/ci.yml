@@ -13,7 +13,7 @@ jobs:
         node-version:
           - 19.6.0
     env:
-      DOCKER_TAG_BASE: ${{ matrix.os }}-ocaml.${{ matrix.ocaml-version }}-node.${{ matrix.node-version }}
+      TAG_BASE: ${{ matrix.os }}-ocaml.${{ matrix.ocaml-version }}-node.${{ matrix.node-version }}
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
@@ -25,7 +25,7 @@ jobs:
           password: ${{ secrets.GITHUB_TOKEN }}
 
       - name: debug
-        run: echo ${{ env.DOCKER_TAG_BASE }}
+        run: echo ${{ env.TAG_BASE }}
 
       - name: Build and push for linux/amd64
         uses: docker/build-push-action@v4
@@ -36,7 +36,7 @@ jobs:
           build-args: |
             NODE_VERSION=${{ matrix.node-version }}
           tags: |
-            ghcr.io/kxcteam/ocaml-general:${{ env.DOCKER_TAG_BASE }}-amd64
+            ghcr.io/kxcteam/ocaml-general:${{ env.TAG_BASE }}-amd64
             ghcr.io/kxcteam/ocaml-general:${{ matrix.ocaml-version }}
 
       - name: Build and push for linux/arm64
@@ -47,4 +47,4 @@ jobs:
           platforms: linux/arm64
           build-args: |
             NODE_VERSION=${{ matrix.node-version }}
-          tags: ghcr.io/kxcteam/ocaml-general:${{ env.DOCKER_TAG_BASE }}-arm64
+          tags: ghcr.io/kxcteam/ocaml-general:${{ env.TAG_BASE }}-arm64
