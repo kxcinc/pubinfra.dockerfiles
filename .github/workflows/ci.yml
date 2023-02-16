@@ -1,37 +1,50 @@
 name: Build and Deploy
 on:
   push:
-    branches: [ master ]
+    branches: [ add-github-actions-to-build-and-upload ]
 jobs:
   build:
     strategy:
       matrix:
-        os: [ ubuntu ]
-        os-version: [ 22.04 ]
-        ocaml-version: [ 4.12.1 ]
+        os:
+          - ubuntu.22.04
+        ocaml-version:
+          - 4.12.1
+        node-version:
+          - 19.6.0
     env:
-      DOCKER_TAG_BASE: ${{ matrix.os }}.${{ matrix.os-version }}-ocaml.${{ matrix.ocaml-version }}
-    runs-on: ${{ matrix.os }}-${{ matrix.os-version }}
+      DOCKER_TAG_BASE: ${{ matrix.os }}-ocaml.${{ matrix.ocaml-version }}-node.${{ matrix.node-version }}
+    runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v3
       - name: Login to GitHub Container Registry
         uses: docker/login-action@v2
         with:
           registry: ghcr.io
           username: ${{ github.actor }}
           password: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: debug
+        run: echo ${{ DOCKER_TAG_BASE }}
+
       - name: Build and push for linux/amd64
         uses: docker/build-push-action@v4
         with:
           context: .
-          push: true
+          push: false
           platforms: linux/amd64
-          tags: ghcr.io/kxcteam/ocaml-general:${{ DOCKER_TAG_BASE }}-amd64, ghcr.io/kxcteam/ocaml-general:${{ ocaml-version }}
+          build-args: |
+            NODE_VERSION=${{ matrix.node-version }}
+          tags: |
+            ghcr.io/kxcteam/ocaml-general:${{ DOCKER_TAG_BASE }}-amd64
+            ghcr.io/kxcteam/ocaml-general:${{ matrix.ocaml-version }}
 
       - name: Build and push for linux/arm64
         uses: docker/build-push-action@v4
         with:
           context: .
-          push: true
+          push: false
           platforms: linux/arm64
+          build-args: |
+            NODE_VERSION=${{ matrix.node-version }}
           tags: ghcr.io/kxcteam/ocaml-general:${{ DOCKER_TAG_BASE }}-arm64
