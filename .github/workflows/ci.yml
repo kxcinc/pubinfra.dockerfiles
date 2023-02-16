@@ -30,7 +30,7 @@ jobs:
       - name: Build and push for linux/amd64
         uses: docker/build-push-action@v4
         with:
-          context: .
+          context: ocaml-general
           push: false
           platforms: linux/amd64
           build-args: |
@@ -42,7 +42,7 @@ jobs:
       - name: Build and push for linux/arm64
         uses: docker/build-push-action@v4
         with:
-          context: .
+          context: ocaml-general
           push: false
           platforms: linux/arm64
           build-args: |
