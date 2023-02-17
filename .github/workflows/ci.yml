@@ -12,7 +12,7 @@ jobs:
           - 4.12.1
           - 4.13.1
           - 4.14.1
-          # Ocaml 5.x is not supported yet
+          # OCaml 5.x is not supported yet
           # - 5.0.0
 
         node-version:
