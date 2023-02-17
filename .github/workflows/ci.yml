@@ -11,7 +11,7 @@ jobs:
         ocaml-version:
           - 4.12.1
         node-version:
-          - 19.6.0
+          - 18.14.1
     env:
       TAG_BASE: ${{ matrix.os }}-ocaml.${{ matrix.ocaml-version }}-node.${{ matrix.node-version }}
       CACHE_DIR: /tmp/docker-cache
