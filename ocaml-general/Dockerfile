@@ -37,7 +37,7 @@ RUN opam install --yes \
   yojson.1.7.0 ppx_yojson_conv.v0.15.0 \
   jsonm.1.0.1 \
   ppx_optcomp.v0.15.0 \
-  brr.0.0.3 \
+  brr.0.0.4 \
   prr.0.1.1 \
   zed.3.2.0 \
   tezt.3.0.0 \
