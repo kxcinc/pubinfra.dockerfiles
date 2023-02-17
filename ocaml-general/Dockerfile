@@ -45,7 +45,8 @@ RUN opam install --yes \
   ppx_inline_test.v0.15.0 \
   alcotest.1.6.0 \
   qcheck.0.19.1 \
-  qcheck-alcotest.0.19.1
+  qcheck-alcotest.0.19.1 \
+  && opam clean -y --logs --repo-cache --download-cache --switch-cleanup
 
 ENV DEBIAN_FRONTEND=$DEBIAN_FRONTEND_OLD
 ENV OPAMROOT=/root/.opam
