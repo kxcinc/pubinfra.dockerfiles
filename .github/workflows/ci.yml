@@ -58,7 +58,7 @@ jobs:
           username: ${{ github.actor }}
           password: ${{ secrets.GITHUB_TOKEN }}
 
-      - name: Build and push for linux/${{ matrix.arch }}
+      - name: Build and push image (${{ env.DOCKER_TAG }})
         uses: docker/build-push-action@v4
         with:
           context: ocaml-general
@@ -71,7 +71,7 @@ jobs:
           cache-from: type=local,src=${{ env.CACHE_DIR }}/.buildx-cache
           cache-to: type=local,dest=${{ env.CACHE_DIR }}/.buildx-cache-new,mode=max
 
-      - name: Build and push for alias (OCaml ${{ matrix.ocaml-verion }})
+      - name: Build and push image (OCaml ${{ matrix.ocaml-verion }})
         if: ${{ matrix.node-version == 'hydrogen' && matrix.arch == 'amd64' }}
         uses: docker/build-push-action@v4
         with:
