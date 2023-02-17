@@ -24,9 +24,9 @@ RUN npm install yarn -g
 RUN apt-get update && apt-get install -y \
   opam
 
-ARG VER=4.12.1
+ARG OCAML_VERSION=4.12.1
 RUN opam init --auto-setup --yes --bare --disable-sandboxing
-RUN opam switch create $VER
+RUN opam switch create $OCAML_VERSION
 RUN opam install --yes \
   dune.3.4.0 \
   merlin \
