@@ -29,7 +29,7 @@ RUN opam switch create $VER
 RUN opam install --yes \
   dune.3.4.0 \
   merlin \
-  odoc.2.1.1 \
+  odoc.2.2.0 \
   ppxlib.0.26.0 \
   ppx_deriving.5.2.1 \
   js_of_ocaml.4.1.0 js_of_ocaml-ppx.4.1.0 \
@@ -41,6 +41,7 @@ RUN opam install --yes \
   prr.0.1.1 \
   zed.3.2.0 \
   tezt.3.0.0 \
+  ocamlformat.0.24.1 \
   ppx_inline_test.v0.15.0 \
   alcotest.1.6.0 \
   qcheck.0.19.1 \
