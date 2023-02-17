@@ -71,6 +71,19 @@ jobs:
           cache-from: type=local,src=${{ env.CACHE_DIR }}/.buildx-cache
           cache-to: type=local,dest=${{ env.CACHE_DIR }}/.buildx-cache-new,mode=max
 
+      - name: Build and push for alias (OCaml ${{ matrix.ocaml-verion }})
+        if: ${{ matrix.node-version == 'hydrogen' && matrix.arch == 'amd64' }}
+        uses: docker/build-push-action@v4
+        with:
+          context: ocaml-general
+          push: false
+          platforms: linux/${{ matrix.arch }}
+          build-args: |
+            NODE_VERSION=${{ matrix.node-version }}
+            OCAML_VERSION=${{ matrix.ocaml-version }}
+          tags: ghcr.io/kxcteam/ocaml-general:${{ matrix.ocaml-version }}
+          cache-from: type=local,src=${{ env.CACHE_DIR }}/.buildx-cache-new
+
       - name: Move cache
         run: |
           cd ${{ env.CACHE_DIR }}
