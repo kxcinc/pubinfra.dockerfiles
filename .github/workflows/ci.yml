@@ -47,10 +47,10 @@ jobs:
         uses: actions/cache@v2
         with:
           path: ${{ env.CACHE_DIR }}
-          key: ${{ runner.os }}-buildx-${{ env.DOCKER_TAG }}-${{ github.sha }}
+          key: ${{ runner.os }}-buildx-${{ matrix.arch }}-${{ env.DOCKER_TAG }}-${{ github.sha }}
           restore-keys: |
-            ${{ runner.os }}-buildx-${{ env.DOCKER_TAG }}
-            ${{ runner.os }}-buildx-
+            ${{ runner.os }}-buildx-${{ matrix.arch }}-${{ env.DOCKER_TAG }}
+            ${{ runner.os }}-buildx-${{ matrix.arch }}-
 
       - name: Login to GitHub Container Registry
         uses: docker/login-action@v2
