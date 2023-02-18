@@ -7,7 +7,7 @@ on:
       - '.github/workflows/ocaml-general.yml'
 
 jobs:
-  build:
+  build-deploy-ocaml-general:
     strategy:
       matrix:
         ocaml-version:
@@ -30,6 +30,8 @@ jobs:
       DOCKER_TAG: ${{ matrix.os }}-ocaml.${{ matrix.ocaml-version }}-node.${{ matrix.node-version }}-${{ matrix.arch }}
       CACHE_DIR: /tmp/docker-cache
 
+    if: ${{ (! github.event.pull_request.draft) || (matrix.ocaml-version == '4.13.1' && matrix.node-version == 'hydrogen') }}
+
     runs-on: ubuntu-latest
 
     steps:
@@ -46,6 +48,7 @@ jobs:
       - run: mkdir -p ${{ env.CACHE_DIR }}
 
       - name: Cache Docker layers
+        if: ${{ matrix.ocaml-version == '4.13.1' && matrix.node-version == 'hydrogen' }}
         uses: actions/cache@v2
         with:
           path: ${{ env.CACHE_DIR }}
