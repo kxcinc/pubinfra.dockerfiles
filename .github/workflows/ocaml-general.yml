@@ -5,6 +5,13 @@ on:
       - 'ocaml-general/**'
       - '!ocaml-general/README.md'
       - '.github/workflows/ocaml-general.yml'
+    branches: [main]
+  pull_request:
+    types: [opened, synchronize, reopened, ready_for_review]
+    paths:
+      - 'ocaml-general/**'
+      - '!ocaml-general/README.md'
+      - '.github/workflows/ocaml-general.yml'
 
 jobs:
   validate-ocaml-general:
