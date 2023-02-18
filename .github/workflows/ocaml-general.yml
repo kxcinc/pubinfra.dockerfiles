@@ -1,4 +1,4 @@
-name: Build and Deploy ocaml-general Docker Images
+name: OCaml-General
 on:
   push:
     paths:
