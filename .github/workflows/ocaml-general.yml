@@ -65,7 +65,7 @@ jobs:
         uses: docker/build-push-action@v4
         with:
           context: ocaml-general
-          no_push: ${{ github.ref != 'refs/heads/main' }}
+          push: ${{ github.ref == 'refs/heads/main' }}
           platforms: linux/${{ matrix.arch }}
           build-args: |
             NODE_VERSION=${{ matrix.node-version }}
@@ -79,7 +79,7 @@ jobs:
         uses: docker/build-push-action@v4
         with:
           context: ocaml-general
-          no_push: ${{ github.ref != 'refs/heads/main' }}
+          push: ${{ github.ref == 'refs/heads/main' }}
           platforms: linux/${{ matrix.arch }}
           build-args: |
             NODE_VERSION=${{ matrix.node-version }}
