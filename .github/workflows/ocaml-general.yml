@@ -156,15 +156,15 @@ jobs:
           tags: "ghcr.io/kxcteam/ocaml-general:${{ matrix.ocaml-version }},ghcr.io/kxcteam/ocaml-general:${{ matrix.ocaml-version }}-${{ github.sha }}"
           cache-from: type=local,src=${{ env.CACHE_DIR }}/.buildx-cache-new
 
+      - name: Move cache
+        run: |
+          cd ${{ env.CACHE_DIR }}
+          rm -rf .buildx-cache
+          mv .buildx-cache-new .buildx-cache
+
       - name: Store Docker Layers Cache
         if: ${{ matrix.ocaml-version == '4.13.1' && matrix.node-version == 'hydrogen' }}
         uses: actions/cache/save@v3
         with:
           path: ${{ env.CACHE_DIR }}
           key: ${{ runner.os }}-buildx-${{ matrix.arch }}-${{ env.DOCKER_TAG }}-${{ github.sha }}
-
-      - name: Move cache
-        run: |
-          cd ${{ env.CACHE_DIR }}
-          rm -rf .buildx-cache
-          mv .buildx-cache-new .buildx-cache
