@@ -97,7 +97,6 @@ jobs:
     env:
       DOCKER_TAG: ${{ matrix.os }}-ocaml.${{ matrix.ocaml-version }}-node.${{ matrix.node-version }}-${{ matrix.arch }}
       CACHE_DIR: /tmp/docker-cache
-      PACKAGE_INSTALL_SCRIPT_FILENAME: install_ocaml_${{ cut -d'.' -f1 <<< matrix.ocaml-version }}_packages.sh
 
     if: github.event.pull_request.draft == false
 
@@ -105,6 +104,9 @@ jobs:
 
     steps:
       - uses: actions/checkout@v3
+
+      - name: Set up env var
+        run: echo "PACKAGE_INSTALL_SCRIPT_FILENAME=install_ocaml_$(eval cut -d'.' -f1 <<< ${{ matrix.ocaml-version }})_packages.sh" >> $GITHUB_ENV
 
       - name: Set up QEMU for arm64
         uses: docker/setup-qemu-action@v2
