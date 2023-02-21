@@ -20,6 +20,7 @@ jobs:
       matrix:
         ocaml-version:
           - 4.13.1
+          - 5.0.0
         arch:
           - amd64
           # - arm64 # it's taking too long for the purpose of validation
@@ -35,6 +36,9 @@ jobs:
 
     steps:
       - uses: actions/checkout@v3
+
+      - name: Set up env var
+        run: echo "PACKAGE_INSTALL_SCRIPT_FILENAME=install_ocaml_$(eval cut -d'.' -f1 <<< ${{ matrix.ocaml-version }})_packages.sh" | tee -a $GITHUB_ENV
 
       - name: Set up QEMU for arm64
         uses: docker/setup-qemu-action@v2
@@ -64,6 +68,7 @@ jobs:
           build-args: |
             NODE_VERSION=${{ matrix.node-version }}
             OCAML_VERSION=${{ matrix.ocaml-version }}
+            PACKAGE_INSTALL_SCRIPT_FILENAME=${{ env.PACKAGE_INSTALL_SCRIPT_FILENAME }}
           cache-from: type=local,src=${{ env.CACHE_DIR }}/.buildx-cache
           cache-to: type=local,dest=${{ env.CACHE_DIR }}/.buildx-cache-new,mode=max
 
@@ -81,8 +86,7 @@ jobs:
           - 4.12.1
           - 4.13.1
           - 4.14.1
-          # OCaml 5.x is not supported yet
-          # - 5.0.0
+          - 5.0.0
         arch:
           - amd64
           - arm64
@@ -103,6 +107,9 @@ jobs:
 
     steps:
       - uses: actions/checkout@v3
+
+      - name: Set up env var
+        run: echo "PACKAGE_INSTALL_SCRIPT_FILENAME=install_ocaml_$(eval cut -d'.' -f1 <<< ${{ matrix.ocaml-version }})_packages.sh" | tee -a $GITHUB_ENV
 
       - name: Set up QEMU for arm64
         uses: docker/setup-qemu-action@v2
@@ -139,6 +146,7 @@ jobs:
           build-args: |
             NODE_VERSION=${{ matrix.node-version }}
             OCAML_VERSION=${{ matrix.ocaml-version }}
+            PACKAGE_INSTALL_SCRIPT_FILENAME=${{ env.PACKAGE_INSTALL_SCRIPT_FILENAME }}
           tags: "ghcr.io/kxcteam/ocaml-general:${{ env.DOCKER_TAG }},ghcr.io/kxcteam/ocaml-general:${{ env.DOCKER_TAG }}-${{ github.sha }}"
           cache-from: type=local,src=${{ env.CACHE_DIR }}/.buildx-cache
           cache-to: type=local,dest=${{ env.CACHE_DIR }}/.buildx-cache-new,mode=max
@@ -153,6 +161,7 @@ jobs:
           build-args: |
             NODE_VERSION=${{ matrix.node-version }}
             OCAML_VERSION=${{ matrix.ocaml-version }}
+            PACKAGE_INSTALL_SCRIPT_FILENAME=${{ env.PACKAGE_INSTALL_SCRIPT_FILENAME }}
           tags: "ghcr.io/kxcteam/ocaml-general:${{ matrix.ocaml-version }},ghcr.io/kxcteam/ocaml-general:${{ matrix.ocaml-version }}-${{ github.sha }}"
           cache-from: type=local,src=${{ env.CACHE_DIR }}/.buildx-cache-new
 
