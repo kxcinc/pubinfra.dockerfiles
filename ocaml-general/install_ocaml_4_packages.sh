@@ -6,7 +6,7 @@ opam install --yes \
   odoc.2.2.0 \
   ppxlib.0.26.0 \
   ppx_deriving.5.2.1 \
-  js_of_ocaml.4.1.0 js_of_ocaml-ppx.4.1.0 js_of_ocaml-ppx.4.1.0 \
+  js_of_ocaml.4.1.0 js_of_ocaml-ppx.4.1.0 js_of_ocaml-lwt.4.1.0 \
   sexplib.v0.15.0 ppx_sexp_conv.v0.15.1 \
   yojson.1.7.0 ppx_yojson_conv.v0.15.0 \
   jsonm.1.0.1 \

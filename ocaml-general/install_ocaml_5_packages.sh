@@ -19,4 +19,5 @@ opam install --yes \
   ppx_inline_test.v0.15.0 \
   alcotest.1.6.0 \
   qcheck.0.20 \
-  qcheck-alcotest.0.20
+  qcheck-alcotest.0.20 \
+  && opam clean -y --logs --repo-cache --download-cache --switch-cleanup
