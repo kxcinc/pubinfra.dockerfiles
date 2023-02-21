@@ -65,6 +65,7 @@ jobs:
           build-args: |
             NODE_VERSION=${{ matrix.node-version }}
             OCAML_VERSION=${{ matrix.ocaml-version }}
+            PACKAGE_INSTALL_SCRIPT_FILENAME=${{ env.PACKAGE_INSTALL_SCRIPT_FILENAME }}
           cache-from: type=local,src=${{ env.CACHE_DIR }}/.buildx-cache
           cache-to: type=local,dest=${{ env.CACHE_DIR }}/.buildx-cache-new,mode=max
 
@@ -96,6 +97,7 @@ jobs:
     env:
       DOCKER_TAG: ${{ matrix.os }}-ocaml.${{ matrix.ocaml-version }}-node.${{ matrix.node-version }}-${{ matrix.arch }}
       CACHE_DIR: /tmp/docker-cache
+      PACKAGE_INSTALL_SCRIPT_FILENAME: install_ocaml_${{ cut -d'.' -f1 <<< matrix.ocaml-version }}_packages.sh
 
     if: github.event.pull_request.draft == false
 
@@ -139,6 +141,7 @@ jobs:
           build-args: |
             NODE_VERSION=${{ matrix.node-version }}
             OCAML_VERSION=${{ matrix.ocaml-version }}
+            PACKAGE_INSTALL_SCRIPT_FILENAME=${{ env.PACKAGE_INSTALL_SCRIPT_FILENAME }}
           tags: "ghcr.io/kxcteam/ocaml-general:${{ env.DOCKER_TAG }},ghcr.io/kxcteam/ocaml-general:${{ env.DOCKER_TAG }}-${{ github.sha }}"
           cache-from: type=local,src=${{ env.CACHE_DIR }}/.buildx-cache
           cache-to: type=local,dest=${{ env.CACHE_DIR }}/.buildx-cache-new,mode=max
@@ -153,6 +156,7 @@ jobs:
           build-args: |
             NODE_VERSION=${{ matrix.node-version }}
             OCAML_VERSION=${{ matrix.ocaml-version }}
+            PACKAGE_INSTALL_SCRIPT_FILENAME=${{ env.PACKAGE_INSTALL_SCRIPT_FILENAME }}
           tags: "ghcr.io/kxcteam/ocaml-general:${{ matrix.ocaml-version }},ghcr.io/kxcteam/ocaml-general:${{ matrix.ocaml-version }}-${{ github.sha }}"
           cache-from: type=local,src=${{ env.CACHE_DIR }}/.buildx-cache-new
 

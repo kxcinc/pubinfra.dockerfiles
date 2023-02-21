@@ -25,10 +25,10 @@ RUN apt-get update && apt-get install -y \
   opam
 
 ARG OCAML_VERSION=4.13.1
-ARG OCAML_VERSION_MAJOR=$(eval cut -d'.' -f1 <<< $OCAML_VERSION)
+ARG PACKAGE_INSTALL_SCRIPT_FILENAME=install_ocaml_4_packages.sh
 RUN opam init --auto-setup --yes --bare --disable-sandboxing
 RUN opam switch create $OCAML_VERSION
-COPY install_ocaml_${OCAML_VERSION_MAJOR}_packages.sh /tmp/install_packages.sh
+COPY PACKAGE_INSTALL_SCRIPT_FILENAME /tmp/install_packages.sh
 RUN /tmp/install_packages.sh && rm /tmp/install_packages.sh
 
 ENV DEBIAN_FRONTEND=$DEBIAN_FRONTEND_OLD
