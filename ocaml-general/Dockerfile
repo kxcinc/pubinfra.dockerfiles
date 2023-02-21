@@ -24,7 +24,7 @@ RUN npm install yarn -g
 RUN apt-get update && apt-get install -y \
   opam
 
-ARG OCAML_VERSION=4.13.1
+ARG OCAML_VERSION=5.0.0
 ARG PACKAGE_INSTALL_SCRIPT_FILENAME=install_ocaml_4_packages.sh
 RUN opam init --auto-setup --yes --bare --disable-sandboxing
 RUN opam switch create $OCAML_VERSION
