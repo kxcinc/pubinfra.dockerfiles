@@ -25,7 +25,7 @@ $ docker pull ghcr.io/kxcteam/hello-world-alpine
 
 ### Run Image
 ```bash
-$ docker run -it --rm kxcteam/hello-world-alpine
+$ docker run -it --rm ghcr.io/kxcteam/hello-world-alpine
  _______________
 < Hello World!! >
  ---------------
@@ -34,7 +34,7 @@ $ docker run -it --rm kxcteam/hello-world-alpine
             (__)\       )\/\
                 ||----w |
                 ||     ||
-$ docker run -it --rm kxcteam/hello-world-alpine -b 'See you!!'
+$ docker run -it --rm ghcr.io/kxcteam/hello-world-alpine -b 'See you!!'
  ___________
 < See you!! >
  -----------
