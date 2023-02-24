@@ -113,7 +113,7 @@ jobs:
       - name: Set up env var
         run: |
           echo "PACKAGE_INSTALL_SCRIPT_FILENAME=install_ocaml_$(eval cut -d'.' -f1 <<< ${{ matrix.ocaml-version }})_packages.sh" | tee -a $GITHUB_ENV
-          echo "DOCKER_TAG_LIST=${{ env.PACKAGE_NAME }}:${{ env.DOCKER_TAG }},${{ env.PACKAGE_NAME }}:${{ env.DOCKER_TAG }}-${{ github.sha }}" | tee -a $GITHUB_ENV
+          echo "DOCKER_TAG_LIST=${{ env.PACKAGE_NAME }}:${{ env.DOCKER_TAG }},${{ env.PACKAGE_NAME }}:${{ env.DOCKER_TAG }}-${{ github.sha }}" | tee -a $GITHUB_ENV  | tr '=,' '\n' | sort
       
       - name: Set up env var for alias (node hydrogen && arch amd64)
         if: ${{ matrix.node-version == 'hydrogen' && matrix.arch == 'amd64' }}
