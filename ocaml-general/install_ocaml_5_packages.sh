@@ -1,7 +1,7 @@
 #!/bin/sh
 
 opam install --yes \
-  dune.3.4.0 \
+  dune.3.7.0 \
   merlin \
   odoc.2.2.0 \
   ppxlib.0.28.0 \
