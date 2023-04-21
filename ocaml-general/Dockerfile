@@ -11,6 +11,7 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
   git \
   npm \
   git-lfs \
+  libpq-dev \
   pkg-config \
   && rm -rf /var/lib/apt/lists/*
 
