@@ -13,6 +13,7 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
   git-lfs \
   libpq-dev \
   pkg-config \
+  jq \
   && rm -rf /var/lib/apt/lists/*
 
 ARG NODE_VERSION=latest
