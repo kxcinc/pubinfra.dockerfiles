@@ -4,7 +4,8 @@ opam install --yes \
   dune.3.7.0 \
   merlin \
   odoc.2.2.0 \
-  ppxlib.0.28.0 \
+  ppxlib.0.27.0 \
+  bisect_ppx.2.8.2 \
   ppx_deriving.5.2.1 \
   js_of_ocaml.4.1.0 js_of_ocaml-ppx.4.1.0 js_of_ocaml-lwt.4.1.0 \
   sexplib.v0.15.1 ppx_sexp_conv.v0.15.1 \
