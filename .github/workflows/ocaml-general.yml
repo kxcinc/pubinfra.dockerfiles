@@ -109,7 +109,7 @@ jobs:
     env:
       DOCKER_TAG: ${{ matrix.os }}-ocaml.${{ matrix.ocaml-version }}-node.${{ matrix.node-version }}-${{ matrix.arch }}
       CACHE_DIR: /tmp/docker-cache
-      PACKAGE_NAME: ghcr.io/kxcteam/ocaml-general
+      PACKAGE_NAME: ghcr.io/kxcinc/ocaml-general
 
     if: github.event.pull_request.draft == false
 

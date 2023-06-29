@@ -1,5 +1,5 @@
 ## GitHub Container Registry
-[https://github.com/orgs/kxcteam/packages/container/package/hello-world-alpine](https://github.com/orgs/kxcteam/packages/container/package/hello-world-alpine)
+[https://github.com/orgs/kxcinc/packages/container/package/hello-world-alpine](https://github.com/orgs/kxcinc/packages/container/package/hello-world-alpine)
 
 ## Usage
 
@@ -13,19 +13,19 @@ To get the image, use one of the following methods:
 #### Build Dockerfile
 
 ```bash
-$ git clone kxcteam/pubinfra.dockerfiles
-$ docker build -t kxcteam/hello-world-alpine pubinfra.dockerfiles/hello-world-alpine
+$ git clone kxcinc/pubinfra.dockerfiles
+$ docker build -t kxcinc/hello-world-alpine pubinfra.dockerfiles/hello-world-alpine
 ```
 
 #### Pull from GitHub Container Registry
 
 ```bash
-$ docker pull ghcr.io/kxcteam/hello-world-alpine
+$ docker pull ghcr.io/kxcinc/hello-world-alpine
 ```
 
 ### Run Image
 ```bash
-$ docker run -it --rm ghcr.io/kxcteam/hello-world-alpine
+$ docker run -it --rm ghcr.io/kxcinc/hello-world-alpine
  _______________
 < Hello World!! >
  ---------------
@@ -34,7 +34,7 @@ $ docker run -it --rm ghcr.io/kxcteam/hello-world-alpine
             (__)\       )\/\
                 ||----w |
                 ||     ||
-$ docker run -it --rm ghcr.io/kxcteam/hello-world-alpine -b 'See you!!'
+$ docker run -it --rm ghcr.io/kxcinc/hello-world-alpine -b 'See you!!'
  ___________
 < See you!! >
  -----------

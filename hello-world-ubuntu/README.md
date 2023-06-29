@@ -1,5 +1,5 @@
 ## GitHub Container Registry
-[https://github.com/orgs/kxcteam/packages/container/package/hello-world-ubuntu](https://github.com/orgs/kxcteam/packages/container/package/hello-world-ubuntu)
+[https://github.com/orgs/kxcinc/packages/container/package/hello-world-ubuntu](https://github.com/orgs/kxcinc/packages/container/package/hello-world-ubuntu)
 
 ## Usage
 
@@ -13,19 +13,19 @@ To get the image, use one of the following methods:
 #### Build Dockerfile
 
 ```bash
-$ git clone kxcteam/pubinfra.dockerfiles
-$ docker build -t kxcteam/hello-world-ubuntu pubinfra.dockerfiles/hello-world-ubuntu
+$ git clone kxcinc/pubinfra.dockerfiles
+$ docker build -t kxcinc/hello-world-ubuntu pubinfra.dockerfiles/hello-world-ubuntu
 ```
 
 #### Pull from GitHub Container Registry
 
 ```bash
-$ docker pull ghcr.io/kxcteam/hello-world-ubuntu
+$ docker pull ghcr.io/kxcinc/hello-world-ubuntu
 ```
 
 ### Run Image
 ```bash
-$ docker run -it --rm ghcr.io/kxcteam/hello-world-ubuntu
+$ docker run -it --rm ghcr.io/kxcinc/hello-world-ubuntu
  _______________
 < Hello World!! >
  ---------------
@@ -34,7 +34,7 @@ $ docker run -it --rm ghcr.io/kxcteam/hello-world-ubuntu
             (__)\       )\/\
                 ||----w |
                 ||     ||
-$ docker run -it --rm ghcr.io/kxcteam/hello-world-ubuntu -b 'See you!!'
+$ docker run -it --rm ghcr.io/kxcinc/hello-world-ubuntu -b 'See you!!'
  ___________
 < See you!! >
  -----------

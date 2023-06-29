@@ -1,7 +1,7 @@
 ## usage
 
-- `docker pull ghcr.io/kxcteam/ocaml-general:$TAG`, see below for spec
-- see https://github.com/kxcteam/pubinfra.dockerfiles/pkgs/container/ocaml-general for available tags
+- `docker pull ghcr.io/kxcinc/ocaml-general:$TAG`, see below for spec
+- see https://github.com/kxcinc/pubinfra.dockerfiles/pkgs/container/ocaml-general for available tags
 
 ## tag convention
 - `${ocaml-version}`
