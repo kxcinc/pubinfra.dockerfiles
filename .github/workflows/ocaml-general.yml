@@ -6,7 +6,15 @@ on:
       - '!ocaml-general/README.md'
       - '.github/workflows/ocaml-general.yml'
     branches: [main]
-
+  workflow_dispatch:
+    inputs:
+      ref:
+        description: branch|tag|SHA to checkout
+        default: 'main'
+        required: true
+  schedule:
+    # 日本時間の月曜日午前2時に毎週実行される
+    - cron:  '0 17 * * 0'
   pull_request:
     types: [opened, synchronize, reopened, ready_for_review]
     paths:
