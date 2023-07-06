@@ -4,6 +4,7 @@ ENV DEBIAN_FRONTEND_OLD=$DEBIAN_FRONTEND
 ENV DEBIAN_FRONTEND=noninteractive
 
 RUN apt-get update && apt-get install -y --no-install-recommends \
+  netbase \
   build-essential \
   clang \
   cmake \
