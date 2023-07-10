@@ -143,6 +143,7 @@ jobs:
       - run: mkdir -p ${{ env.CACHE_DIR }}
 
       - name: Restore Docker Layers Cache
+        if: github.event.schedule == null
         uses: actions/cache/restore@v3
         with:
           path: ${{ env.CACHE_DIR }}
