@@ -87,6 +87,12 @@ jobs:
           rm -rf .buildx-cache
           mv .buildx-cache-new .buildx-cache
 
+  ocaml-general-validated:
+    needs: validate-ocaml-general
+    runs-on: ubuntu-latest
+    steps:
+      - run: echo "all clear"
+
   build-deploy-ocaml-general:
     needs: validate-ocaml-general
     strategy:
@@ -185,3 +191,9 @@ jobs:
         with:
           path: ${{ env.CACHE_DIR }}
           key: ${{ runner.os }}-buildx-${{ matrix.arch }}-${{ env.DOCKER_TAG }}-${{ github.sha }}
+
+  ocaml-general-matrix-checked:
+    needs: build-deploy-ocaml-general
+    runs-on: ubuntu-latest
+    steps:
+      - run: echo "all clear"
