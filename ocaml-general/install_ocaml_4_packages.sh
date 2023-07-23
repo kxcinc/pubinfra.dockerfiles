@@ -21,5 +21,4 @@ opam install --yes \
   alcotest.1.6.0 \
   qcheck.0.20 \
   qcheck-alcotest.0.20 \
-  melange.1.0.0 rescript-syntax.1.0.0 \
   && opam clean -y --logs --repo-cache --download-cache --switch-cleanup
