@@ -35,7 +35,7 @@ jobs:
           - amd64
           # - arm64 # it's taking too long for the purpose of validation
         node-version:
-          - hydrogen # v18 Active LTS
+          - iron # v18 Active LTS
         os:
           - ubuntu.22.04
     env:
@@ -108,6 +108,7 @@ jobs:
           - arm64
         node-version:
           - hydrogen # v18 Active LTS
+          - iron # v20 Active LTS
           - latest
         os:
           - ubuntu.22.04
@@ -128,8 +129,8 @@ jobs:
           echo "PACKAGE_INSTALL_SCRIPT_FILENAME=install_ocaml_$(eval cut -d'.' -f1-2 <<< ${{ matrix.ocaml-version }})_packages.sh" | tee -a $GITHUB_ENV
           echo "DOCKER_TAG_LIST=${{ env.PACKAGE_NAME }}:${{ env.DOCKER_TAG }},${{ env.PACKAGE_NAME }}:${{ env.DOCKER_TAG }}-${{ github.sha }}" | tee -a $GITHUB_ENV  | tr '=,' '\n' | sort
       
-      - name: Set up env var for alias (node hydrogen && arch amd64)
-        if: ${{ matrix.node-version == 'hydrogen' && matrix.arch == 'amd64' }}
+      - name: Set up env var for alias (node iron && arch amd64)
+        if: ${{ matrix.node-version == 'iron' && matrix.arch == 'amd64' }}
         run: echo "DOCKER_TAG_LIST=${{ env.DOCKER_TAG_LIST }},${{ env.PACKAGE_NAME }}:${{ matrix.ocaml-version }},${{ env.PACKAGE_NAME }}:${{ matrix.ocaml-version }}-${{ github.sha }}" | tee -a $GITHUB_ENV | tr '=,' '\n' | sort
 
       - name: Set up QEMU for arm64
@@ -185,7 +186,7 @@ jobs:
           mv .buildx-cache-new .buildx-cache
 
       - name: Store Docker Layers Cache
-        if: ${{ matrix.ocaml-version == '4.13.1' && matrix.node-version == 'hydrogen' }}
+        if: ${{ matrix.ocaml-version == '4.13.1' && matrix.node-version == 'iron' }}
         uses: actions/cache/save@v3
         with:
           path: ${{ env.CACHE_DIR }}
