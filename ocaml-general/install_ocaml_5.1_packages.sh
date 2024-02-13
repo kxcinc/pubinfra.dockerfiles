@@ -26,7 +26,7 @@ packages=(
   uuidm.0.9.8
   bigstringaf.0.9.1
   angstrom.0.16.0
-  uri.4.4.0 
+  uri.4.4.0
 )
 
 opam install --yes "${packages[@]}" \
