@@ -2,6 +2,7 @@
 
 packages=(
   dune.3.10.0
+  dune-build-info.3.10.0
   merlin
   odoc.2.2.1
   ppxlib.0.30.0
@@ -21,6 +22,11 @@ packages=(
   sexplib.v0.16.0 ppx_sexp_conv.v0.16.0
   yojson.2.1.0 ppx_yojson_conv.v0.16.0
   tezt.3.1.1
+  melange.2.1.0
+  uuidm.0.9.8
+  bigstringaf.0.9.1
+  angstrom.0.16.0
+  uri.4.4.0
 )
 
 opam install --yes "${packages[@]}" \
