@@ -29,8 +29,22 @@ packages=(
   uri.4.4.0
 )
 
+pins=(
+  dune 3.10.0
+  dune-action-plugin 3.10.0
+  dune-build-info 3.10.0
+  dune-configurator 3.10.0
+  dune-glob 3.10.0
+  dune-private-libs 3.10.0
+  dune-rpc 3.10.0
+  dune-rpc-lwt 3.10.0
+  dune-site 3.10.0
+)
+
 opam install --yes "${packages[@]}" \
   && opam clean -y --logs --repo-cache --download-cache --switch-cleanup
+
+echo "${pins[@]}" | xargs -n 2 opam pin -n add
 
 echo -n "exec: "
 printf "%s\n" "${packages[@]}" | cut -d'.' -f1 | xargs echo opam show -f package
