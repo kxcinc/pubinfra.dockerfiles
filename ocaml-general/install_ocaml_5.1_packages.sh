@@ -41,10 +41,10 @@ pins=(
   dune-site 3.10.0
 )
 
+echo "${pins[@]}" | xargs -n 2 opam pin -n add
+
 opam install --yes "${packages[@]}" \
   && opam clean -y --logs --repo-cache --download-cache --switch-cleanup
-
-echo "${pins[@]}" | xargs -n 2 opam pin -n add
 
 echo -n "exec: "
 printf "%s\n" "${packages[@]}" | cut -d'.' -f1 | xargs echo opam show -f package
