@@ -5,7 +5,7 @@ packages=(
   dune-build-info.3.10.0
   merlin
   odoc.2.2.1
-  ppxlib.0.30.0
+  ppxlib.0.32.0
   bisect_ppx.2.8.3
   ppx_deriving.5.2.1
   js_of_ocaml.5.4.0 js_of_ocaml-ppx.5.4.0 js_of_ocaml-lwt.5.4.0
