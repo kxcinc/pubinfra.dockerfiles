@@ -30,6 +30,7 @@ RUN apt-get update && apt-get install -y \
 ARG OCAML_VERSION=5.0.0
 ARG PACKAGE_INSTALL_SCRIPT_FILENAME=install_ocaml_4_packages.sh
 RUN opam init --auto-setup --yes --bare --disable-sandboxing
+RUN opam update
 RUN opam switch create $OCAML_VERSION
 COPY $PACKAGE_INSTALL_SCRIPT_FILENAME /tmp/install_packages.sh
 RUN /tmp/install_packages.sh && rm /tmp/install_packages.sh
