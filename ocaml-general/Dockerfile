@@ -3,7 +3,8 @@ FROM ubuntu:22.04
 ENV DEBIAN_FRONTEND_OLD=$DEBIAN_FRONTEND
 ENV DEBIAN_FRONTEND=noninteractive
 
-RUN apt-get update && apt-get install -y --no-install-recommends \
+RUN apt-get update
+RUN apt-get install -y --no-install-recommends \
   netbase \
   build-essential \
   clang \
@@ -14,18 +15,18 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
   git-lfs \
   libpq-dev \
   pkg-config \
-  jq \
-  && rm -rf /var/lib/apt/lists/*
+  jq
+RUN rm -rf /var/lib/apt/lists/*
 
 ARG NODE_VERSION=latest
-RUN npm install n -g && \
-    n $NODE_VERSION && \
-    apt-get purge -y npm
+RUN npm install n -g
+RUN n $NODE_VERSION
+RUN apt-get purge -y npm
 
 RUN npm install yarn -g
 
-RUN apt-get update && apt-get install -y \
-  opam
+RUN apt-get update
+RUN apt-get install -y opam
 
 ARG OCAML_VERSION=5.0.0
 ARG PACKAGE_INSTALL_SCRIPT_FILENAME=install_ocaml_4_packages.sh
