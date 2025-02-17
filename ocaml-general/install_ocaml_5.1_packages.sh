@@ -1,14 +1,14 @@
 #!/bin/bash -xe
 
 packages=(
-  dune.3.10.0
-  dune-build-info.3.10.0
+  dune.3.17.0
+  dune-build-info.3.17.0
   merlin
   odoc.2.2.1
-  ppxlib.0.32.0
+  ppxlib.0.35.0
   bisect_ppx.2.8.3
   ppx_deriving.5.2.1
-  js_of_ocaml.5.4.0 js_of_ocaml-ppx.5.4.0 js_of_ocaml-lwt.5.4.0
+  js_of_ocaml.6.0.1 js_of_ocaml-ppx.6.0.1 js_of_ocaml-lwt.6.0.1
   jsonm.1.0.1
   ezjsonm.1.3.0
   ppx_optcomp.v0.16.0
@@ -30,15 +30,15 @@ packages=(
 )
 
 pins=(
-  dune 3.10.0
-  dune-action-plugin 3.10.0
-  dune-build-info 3.10.0
-  dune-configurator 3.10.0
-  dune-glob 3.10.0
-  dune-private-libs 3.10.0
-  dune-rpc 3.10.0
-  dune-rpc-lwt 3.10.0
-  dune-site 3.10.0
+  dune 3.17.0
+  dune-action-plugin 3.17.0
+  dune-build-info 3.17.0
+  dune-configurator 3.17.0
+  dune-glob 3.17.0
+  dune-private-libs 3.17.0
+  dune-rpc 3.17.0
+  dune-rpc-lwt 3.17.0
+  dune-site 3.17.0
 )
 
 echo "${pins[@]}" | xargs -n 2 opam pin -n add
