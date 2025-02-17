@@ -28,7 +28,7 @@ pins=(
   dune 3.17.0
   dune-action-plugin 3.17.0
   dune-build-info 3.17.0
-  dune-configurator 3.70.0
+  dune-configurator 3.17.0
   dune-glob 3.17.0
   dune-private-libs 3.17.0
   dune-rpc 3.17.0
