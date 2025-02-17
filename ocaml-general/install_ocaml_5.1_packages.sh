@@ -21,7 +21,7 @@ packages=(
   qcheck-alcotest.0.21.2
   sexplib.v0.16.0 ppx_sexp_conv.v0.16.0
   yojson.2.1.0 ppx_yojson_conv.v0.16.0
-  tezt.3.1.1
+  tezt.4.2.0
   melange.2.1.0
   uuidm.0.9.8
   bigstringaf.0.9.1
