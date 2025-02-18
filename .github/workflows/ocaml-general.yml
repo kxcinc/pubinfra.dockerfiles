@@ -29,6 +29,7 @@ jobs:
       matrix:
         ocaml-version:
           - 4.13.1
+          - 4.14.1
           - 5.0.0
           - 5.1.0
         arch:
@@ -42,26 +43,28 @@ jobs:
       DOCKER_TAG: ${{ matrix.os }}-ocaml.${{ matrix.ocaml-version }}-node.${{ matrix.node-version }}-${{ matrix.arch }}
       CACHE_DIR: /tmp/docker-cache
 
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-22.04
 
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
 
       - name: Set up env var
         run: echo "PACKAGE_INSTALL_SCRIPT_FILENAME=install_ocaml_$(eval cut -d'.' -f1-2 <<< ${{ matrix.ocaml-version }})_packages.sh" | tee -a $GITHUB_ENV
 
       - name: Set up QEMU for arm64
-        uses: docker/setup-qemu-action@v2
+        uses: docker/setup-qemu-action@v3
         with:
           platforms: arm64
+          # https://github.com/docker/setup-qemu-action/issues/198
+          image: tonistiigi/binfmt:qemu-v7.0.0-28
 
       - name: Set up Docker Buildx
-        uses: docker/setup-buildx-action@v2
+        uses: docker/setup-buildx-action@v3
 
       - run: mkdir -p ${{ env.CACHE_DIR }}
 
       - name: Cache Docker layers
-        uses: actions/cache@v3
+        uses: actions/cache@v4
         with:
           path: ${{ env.CACHE_DIR }}
           key: ${{ runner.os }}-buildx-${{ matrix.arch }}-${{ env.DOCKER_TAG }}-${{ github.sha }}
@@ -70,7 +73,7 @@ jobs:
             ${{ runner.os }}-buildx-${{ matrix.arch }}-
 
       - name: Validation Docker Build (${{ env.DOCKER_TAG }})
-        uses: docker/build-push-action@v4
+        uses: docker/build-push-action@v6
         with:
           context: ocaml-general
           push: false
@@ -90,7 +93,7 @@ jobs:
 
   ocaml-general-validated:
     needs: validate-ocaml-general
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-22.04
     steps:
       - run: echo "all clear"
 
@@ -119,10 +122,10 @@ jobs:
 
     if: github.event.pull_request.draft == false
 
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-22.04
 
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
 
       - name: Set up env var
         run: |
@@ -134,12 +137,14 @@ jobs:
         run: echo "DOCKER_TAG_LIST=${{ env.DOCKER_TAG_LIST }},${{ env.PACKAGE_NAME }}:${{ matrix.ocaml-version }},${{ env.PACKAGE_NAME }}:${{ matrix.ocaml-version }}-${{ github.sha }}" | tee -a $GITHUB_ENV | tr '=,' '\n' | sort
 
       - name: Set up QEMU for arm64
-        uses: docker/setup-qemu-action@v2
+        uses: docker/setup-qemu-action@v3
         with:
           platforms: arm64
+          # https://github.com/docker/setup-qemu-action/issues/198
+          image: tonistiigi/binfmt:qemu-v7.0.0-28
 
       - name: Set up Docker Buildx
-        uses: docker/setup-buildx-action@v2
+        uses: docker/setup-buildx-action@v3
         # https://github.com/docker/build-push-action/issues/761#issuecomment-1575006515
         # https://github.com/kxcinc/pubinfra.dockerfiles/issues/37
         with:
@@ -150,7 +155,7 @@ jobs:
 
       - name: Restore Docker Layers Cache
         if: github.event.schedule == null
-        uses: actions/cache/restore@v3
+        uses: actions/cache/restore@v4
         with:
           path: ${{ env.CACHE_DIR }}
           key: ${{ runner.os }}-buildx-${{ matrix.arch }}-${{ env.DOCKER_TAG }}-${{ github.sha }}
@@ -159,14 +164,14 @@ jobs:
             ${{ runner.os }}-buildx-${{ matrix.arch }}-
 
       - name: Login to GitHub Container Registry
-        uses: docker/login-action@v2
+        uses: docker/login-action@v3
         with:
           registry: ghcr.io
           username: ${{ github.actor }}
           password: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Build and push image (${{ env.DOCKER_TAG }})
-        uses: docker/build-push-action@v4
+        uses: docker/build-push-action@v6
         with:
           context: ocaml-general
           push: ${{ github.ref == 'refs/heads/main' }}
@@ -187,13 +192,13 @@ jobs:
 
       - name: Store Docker Layers Cache
         if: ${{ matrix.ocaml-version == '5.1.0' && matrix.node-version == 'iron' }}
-        uses: actions/cache/save@v3
+        uses: actions/cache/save@v4
         with:
           path: ${{ env.CACHE_DIR }}
           key: ${{ runner.os }}-buildx-${{ matrix.arch }}-${{ env.DOCKER_TAG }}-${{ github.sha }}
 
   ocaml-general-matrix-checked:
     needs: build-deploy-ocaml-general
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-22.04
     steps:
       - run: echo "all clear"
