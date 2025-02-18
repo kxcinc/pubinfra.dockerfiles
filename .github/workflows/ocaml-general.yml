@@ -42,7 +42,7 @@ jobs:
       DOCKER_TAG: ${{ matrix.os }}-ocaml.${{ matrix.ocaml-version }}-node.${{ matrix.node-version }}-${{ matrix.arch }}
       CACHE_DIR: /tmp/docker-cache
 
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-22.04
 
     steps:
       - uses: actions/checkout@v4
@@ -90,7 +90,7 @@ jobs:
 
   ocaml-general-validated:
     needs: validate-ocaml-general
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-22.04
     steps:
       - run: echo "all clear"
 
@@ -119,7 +119,7 @@ jobs:
 
     if: github.event.pull_request.draft == false
 
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-22.04
 
     steps:
       - uses: actions/checkout@v4
@@ -195,6 +195,6 @@ jobs:
 
   ocaml-general-matrix-checked:
     needs: build-deploy-ocaml-general
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-22.04
     steps:
       - run: echo "all clear"
