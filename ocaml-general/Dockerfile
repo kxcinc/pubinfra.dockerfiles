@@ -3,12 +3,6 @@ FROM ubuntu:22.04
 ENV DEBIAN_FRONTEND_OLD=$DEBIAN_FRONTEND
 ENV DEBIAN_FRONTEND=noninteractive
 
-RUN rm /var/lib/dpkg/info/libc-bin.*
-RUN apt-get update && apt-get install -y \
-  libc-bin \
-  && apt-get clean \
-  && rm -rf /var/lib/apt/lists/*
-
 RUN apt-get update && apt-get install -y --no-install-recommends \
   netbase \
   build-essential \
