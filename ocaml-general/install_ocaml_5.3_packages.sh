@@ -22,6 +22,7 @@ packages=(
   sexplib.v0.17.0 ppx_sexp_conv.v0.17.0
   yojson.2.2.2 ppx_yojson_conv.v0.17.0
   tezt.4.2.0
+  melange.5.0.0-53
   uuidm.0.9.9
   bigstringaf.0.10.0
   angstrom.0.16.1
