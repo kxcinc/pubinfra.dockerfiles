@@ -28,9 +28,9 @@ jobs:
     strategy:
       matrix:
         ocaml-version:
-          - 4.14.3
-          - 5.1.2
-          - 5.3.1
+          - 4.14.2
+          - 5.1.1
+          - 5.3.0
         arch:
           - amd64
           # - arm64 # it's taking too long for the purpose of validation
