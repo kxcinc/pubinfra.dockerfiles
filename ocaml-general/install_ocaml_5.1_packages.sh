@@ -1,44 +1,44 @@
 #!/bin/bash -xe
 
 packages=(
-  dune.3.10.0
-  dune-build-info.3.10.0
+  dune.3.17.2
+  dune-build-info.3.17.2
   merlin
-  odoc.2.2.1
-  ppxlib.0.32.0
+  odoc.2.4.4
+  ppxlib.0.35.0
   bisect_ppx.2.8.3
-  ppx_deriving.5.2.1
-  js_of_ocaml.5.4.0 js_of_ocaml-ppx.5.4.0 js_of_ocaml-lwt.5.4.0
-  jsonm.1.0.1
+  ppx_deriving.6.0.3
+  js_of_ocaml.6.0.1 js_of_ocaml-ppx.6.0.1 js_of_ocaml-lwt.6.0.1
+  jsonm.1.0.2
   ezjsonm.1.3.0
-  ppx_optcomp.v0.16.0
-  brr.0.0.4
+  ppx_optcomp.v0.17.0
+  brr.0.0.7
   prr.0.1.1
-  zed.3.2.0
-  ppx_inline_test.v0.16.0
-  alcotest.1.7.0
-  qcheck.0.21.2
-  qcheck-alcotest.0.21.2
-  sexplib.v0.16.0 ppx_sexp_conv.v0.16.0
-  yojson.2.1.0 ppx_yojson_conv.v0.16.0
-  tezt.3.1.1
-  melange.2.1.0
-  uuidm.0.9.8
-  bigstringaf.0.9.1
-  angstrom.0.16.0
+  zed.3.2.3
+  ppx_inline_test.v0.17.0
+  alcotest.1.8.0
+  qcheck.0.23
+  qcheck-alcotest.0.23
+  sexplib.v0.17.0 ppx_sexp_conv.v0.17.0
+  yojson.2.2.2 ppx_yojson_conv.v0.17.0
+  tezt.4.2.0
+  melange.5.0.0-51
+  uuidm.0.9.9
+  bigstringaf.0.10.0
+  angstrom.0.16.1
   uri.4.4.0
 )
 
 pins=(
-  dune 3.10.0
-  dune-action-plugin 3.10.0
-  dune-build-info 3.10.0
-  dune-configurator 3.10.0
-  dune-glob 3.10.0
-  dune-private-libs 3.10.0
-  dune-rpc 3.10.0
-  dune-rpc-lwt 3.10.0
-  dune-site 3.10.0
+  dune 3.17.2
+  dune-action-plugin 3.17.2
+  dune-build-info 3.17.2
+  dune-configurator 3.17.2
+  dune-glob 3.17.2
+  dune-private-libs 3.17.2
+  dune-rpc 3.17.2
+  dune-rpc-lwt 3.17.2
+  dune-site 3.17.2
 )
 
 echo "${pins[@]}" | xargs -n 2 opam pin -n add

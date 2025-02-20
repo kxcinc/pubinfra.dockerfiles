@@ -28,10 +28,9 @@ jobs:
     strategy:
       matrix:
         ocaml-version:
-          - 4.13.1
-          - 4.14.1
-          - 5.0.0
-          - 5.1.0
+          - 4.14.2
+          - 5.1.1
+          - 5.3.0
         arch:
           - amd64
           # - arm64 # it's taking too long for the purpose of validation
@@ -102,10 +101,9 @@ jobs:
     strategy:
       matrix:
         ocaml-version:
-          - 4.13.1
-          - 4.14.1
-          - 5.0.0
-          - 5.1.0
+          - 4.14.2
+          - 5.1.1
+          - 5.3.0
         arch:
           - amd64
           - arm64
@@ -191,7 +189,7 @@ jobs:
           mv .buildx-cache-new .buildx-cache
 
       - name: Store Docker Layers Cache
-        if: ${{ matrix.ocaml-version == '5.1.0' && matrix.node-version == 'iron' }}
+        if: ${{ matrix.ocaml-version == '5.3.0' && matrix.node-version == 'iron' }}
         uses: actions/cache/save@v4
         with:
           path: ${{ env.CACHE_DIR }}
