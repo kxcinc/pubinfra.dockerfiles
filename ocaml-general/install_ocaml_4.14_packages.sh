@@ -17,7 +17,7 @@ packages=(
   prr.0.1.1
   zed.3.2.3
   tezt.4.2.0
-  melange.5.0.0-414
+  melange.5.0.1-414
   ppx_inline_test.v0.17.0
   alcotest.1.8.0
   qcheck.0.23
