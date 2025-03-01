@@ -4,7 +4,9 @@ FROM ubuntu:$OS_VERSION
 
 ENV DEBIAN_FRONTEND=noninteractive
 
+# NB: first line of dependencies is taken from ocaml/opam:ubuntu-24.04-ocaml-5.3
 RUN apt-get update && apt-get install -y --no-install-recommends \
+  build-essential curl git rsync sudo unzip nano libcap-dev libx11-dev bubblewrap \
   netbase \
   ca-certificates \
   build-essential \
@@ -26,12 +28,7 @@ RUN curl -fsSL -o /usr/local/bin/n https://raw.githubusercontent.com/tj/n/master
 
 RUN npm install yarn -g
 
-# installing the dependencies of opam (including opam itself for simplicity)
-RUN apt-get update && apt-get install -y \
-  opam \
-  && apt-get clean \
-  && rm -rf /var/lib/apt/lists/*
-# installing the latest version of opam
+# install the latest version of opam
 RUN bash -c "mkdir opam-tmp && cd opam-tmp && sh <(curl -fsSL https://opam.ocaml.org/install.sh) --download-only && find . && install opam-* /usr/local/bin/opam && cd .. && rm -rf opam-tmp"
 
 ARG OCAML_VERSION=5.1.1
