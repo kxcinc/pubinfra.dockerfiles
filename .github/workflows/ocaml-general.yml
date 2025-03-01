@@ -120,7 +120,7 @@ jobs:
 
     if: github.event.pull_request.draft == false
 
-    runs-on: ubuntu-24.04
+    runs-on: ${{ matrix.arch == 'arm64' && 'ubuntu-24.04-arm' || 'ubuntu-24.04' }}
 
     steps:
       - uses: actions/checkout@v4
