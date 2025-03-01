@@ -37,12 +37,12 @@ jobs:
         node-version:
           - iron # v18 Active LTS
         os:
-          - ubuntu.22.04
+          - ubuntu.24.04
     env:
       DOCKER_TAG: ${{ matrix.os }}-ocaml.${{ matrix.ocaml-version }}-node.${{ matrix.node-version }}-${{ matrix.arch }}
       CACHE_DIR: /tmp/docker-cache
 
-    runs-on: ubuntu-22.04
+    runs-on: ubuntu-24.04
 
     steps:
       - uses: actions/checkout@v4
@@ -92,7 +92,7 @@ jobs:
 
   ocaml-general-validated:
     needs: validate-ocaml-general
-    runs-on: ubuntu-22.04
+    runs-on: ubuntu-24.04
     steps:
       - run: echo "all clear"
 
@@ -112,7 +112,7 @@ jobs:
           - iron # v20 Active LTS
           - latest
         os:
-          - ubuntu.22.04
+          - ubuntu.24.04
     env:
       DOCKER_TAG: ${{ matrix.os }}-ocaml.${{ matrix.ocaml-version }}-node.${{ matrix.node-version }}-${{ matrix.arch }}
       CACHE_DIR: /tmp/docker-cache
@@ -120,7 +120,7 @@ jobs:
 
     if: github.event.pull_request.draft == false
 
-    runs-on: ubuntu-22.04
+    runs-on: ubuntu-24.04
 
     steps:
       - uses: actions/checkout@v4
@@ -197,6 +197,6 @@ jobs:
 
   ocaml-general-matrix-checked:
     needs: build-deploy-ocaml-general
-    runs-on: ubuntu-22.04
+    runs-on: ubuntu-24.04
     steps:
       - run: echo "all clear"
