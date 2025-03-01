@@ -8,7 +8,7 @@ packages=(
   bisect_ppx.2.8.3
   ppx_deriving.6.0.3
   js_of_ocaml.6.0.1 js_of_ocaml-ppx.6.0.1 js_of_ocaml-lwt.6.0.1
-  sexplib.v0.17.0 ppx_sexp_conv.v0.17.0
+  sexplib.v0.16.0 ppx_sexp_conv.v0.16.0
   yojson.2.2.2 ppx_yojson_conv.v0.17.0
   jsonm.1.0.2
   ezjsonm.1.3.0
