@@ -112,6 +112,7 @@ jobs:
           - iron # v20 Active LTS
           - latest
         os:
+          - ubuntu.22.04
           - ubuntu.24.04
     env:
       DOCKER_TAG: ${{ matrix.os }}-ocaml.${{ matrix.ocaml-version }}-node.${{ matrix.node-version }}-${{ matrix.arch }}
@@ -123,6 +124,18 @@ jobs:
     runs-on: ${{ matrix.arch == 'arm64' && 'ubuntu-24.04-arm' || 'ubuntu-24.04' }}
 
     steps:
+      - name: Split OS value
+        id: action_config
+        shell: bash
+        run: |
+          # Split the OS string by the period
+          OS_NAME=$(echo "${{ matrix.os }}" | cut -d'.' -f1)
+          OS_VERSION=$(echo "${{ matrix.os }}" | cut -d'.' -f2,3)
+
+          # Output to GitHub Actions environment
+          echo "os_name=$OS_NAME" >> $GITHUB_OUTPUT
+          echo "os_version=$OS_VERSION" >> $GITHUB_OUTPUT
+
       - uses: actions/checkout@v4
 
       - name: Set up env var
@@ -178,6 +191,7 @@ jobs:
             NODE_VERSION=${{ matrix.node-version }}
             OCAML_VERSION=${{ matrix.ocaml-version }}
             PACKAGE_INSTALL_SCRIPT_FILENAME=${{ env.PACKAGE_INSTALL_SCRIPT_FILENAME }}
+            OS_VERSION=${{ steps.action_config.outputs.os_version }}
           tags: ${{ env.DOCKER_TAG_LIST }}
           cache-from: type=local,src=${{ env.CACHE_DIR }}/.buildx-cache
           cache-to: type=local,dest=${{ env.CACHE_DIR }}/.buildx-cache-new,mode=max

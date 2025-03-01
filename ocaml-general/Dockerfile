@@ -1,4 +1,6 @@
-FROM ubuntu:24.04
+ARG OS_VERSION=24.04
+
+FROM ubuntu:$OS_VERSION
 
 ENV DEBIAN_FRONTEND=noninteractive
 
@@ -40,7 +42,7 @@ RUN opam switch create $OCAML_VERSION
 COPY $PACKAGE_INSTALL_SCRIPT_FILENAME /tmp/install_packages.sh
 RUN /tmp/install_packages.sh && rm /tmp/install_packages.sh
 
-ENV DEBIAN_FRONTEND=$DEBIAN_FRONTEND_OLD
+ENV DEBIAN_FRONTEND=
 ENV OPAMROOT=/root/.opam
 ENV OPAMROOTISOK=1
 
