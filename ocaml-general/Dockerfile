@@ -4,12 +4,12 @@ ENV DEBIAN_FRONTEND=noninteractive
 
 RUN apt-get update && apt-get install -y --no-install-recommends \
   netbase \
+  ca-certificates \
   build-essential \
   clang \
   cmake \
   curl \
   git \
-  npm \
   git-lfs \
   libpq-dev \
   pkg-config \
@@ -18,9 +18,9 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
   && rm -rf /var/lib/apt/lists/*
 
 ARG NODE_VERSION=latest
-RUN npm install n -g && \
-    n $NODE_VERSION && \
-    apt-get purge -y npm
+RUN curl -fsSL -o /usr/local/bin/n https://raw.githubusercontent.com/tj/n/master/bin/n && \
+  chmod 0755 /usr/local/bin/n && \
+  n $NODE_VERSION
 
 RUN npm install yarn -g
 
