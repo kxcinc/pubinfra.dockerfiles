@@ -21,17 +21,9 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
   && apt-get clean \
   && rm -rf /var/lib/apt/lists/*
 
-# node.js
-ARG NODE_VERSION=latest
-RUN curl -fsSL -o /usr/local/bin/n https://raw.githubusercontent.com/tj/n/master/bin/n && \
-  chmod 0755 /usr/local/bin/n && \
-  n $NODE_VERSION
-
-# yarn
-RUN npm install yarn -g
-
-# bun
+# bun, node.js, and yarn
 RUN curl -fsSL https://bun.sh/install | bash
+RUN bun install -g n yarn && n $NODE_VERSION
 
 # install the latest version of opam
 RUN bash -c "mkdir opam-tmp && cd opam-tmp && sh <(curl -fsSL https://opam.ocaml.org/install.sh) --download-only && find . && install opam-* /usr/local/bin/opam && cd .. && rm -rf opam-tmp"
