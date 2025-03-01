@@ -21,12 +21,17 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
   && apt-get clean \
   && rm -rf /var/lib/apt/lists/*
 
+# node.js
 ARG NODE_VERSION=latest
 RUN curl -fsSL -o /usr/local/bin/n https://raw.githubusercontent.com/tj/n/master/bin/n && \
   chmod 0755 /usr/local/bin/n && \
   n $NODE_VERSION
 
+# yarn
 RUN npm install yarn -g
+
+# bun
+RUN curl -fsSL https://bun.sh/install | bash
 
 # install the latest version of opam
 RUN bash -c "mkdir opam-tmp && cd opam-tmp && sh <(curl -fsSL https://opam.ocaml.org/install.sh) --download-only && find . && install opam-* /usr/local/bin/opam && cd .. && rm -rf opam-tmp"
@@ -39,9 +44,13 @@ RUN opam switch create $OCAML_VERSION
 COPY $PACKAGE_INSTALL_SCRIPT_FILENAME /tmp/install_packages.sh
 RUN /tmp/install_packages.sh && rm /tmp/install_packages.sh
 
+# backward compatibility
+RUN ln -s /usr/local/bin/opam /usr/bin/opam
+
 ENV DEBIAN_FRONTEND=
 ENV OPAMROOT=/root/.opam
 ENV OPAMROOTISOK=1
 
-ENTRYPOINT ["/usr/bin/opam", "exec", "--"]
+WORKDIR /root
+ENTRYPOINT ["/usr/local/bin/opam", "exec", "--"]
 CMD ["/usr/bin/bash"]
