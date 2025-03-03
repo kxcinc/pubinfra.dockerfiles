@@ -27,7 +27,7 @@ WORKDIR /root
   # bun, node.js, and yarn
 RUN curl -fsSL https://bun.sh/install | bash
 ENV PATH="$PATH:/root/.bun/bin"
-RUN bun install -g n yarn && bunx n install $NODE_VERSION
+RUN bun install -g n yarn && bunx n install latest
 
 # install the latest version of opam
 RUN bash -c "mkdir opam-tmp && cd opam-tmp && sh <(curl -fsSL https://opam.ocaml.org/install.sh) --download-only && find . && install opam-* /usr/local/bin/opam && cd .. && rm -rf opam-tmp"
