@@ -1,5 +1,4 @@
 ARG OS_VERSION=24.04
-ARG NODE_VERSION=latest
 
 FROM ubuntu:$OS_VERSION
 
@@ -28,6 +27,8 @@ WORKDIR /root
 RUN curl -fsSL https://bun.sh/install | bash
 ENV PATH="$PATH:/root/.bun/bin"
 RUN bun install -g n yarn
+
+ARG NODE_VERSION=latest
 RUN n install $NODE_VERSION
 
 # install the latest version of opam
