@@ -101,7 +101,6 @@ jobs:
           - amd64
           - arm64
         node-version:
-          - hydrogen # v18 Active LTS
           - iron # v20 Active LTS
           - jod # v22 Active LTS
           - latest
