@@ -35,7 +35,7 @@ jobs:
           - amd64
           # - arm64 # it's taking too long for the purpose of validation
         node-version:
-          - jod # v22 Active LTS
+          - 22 # jod, v22 Active LTS
         os:
           - ubuntu.24.04
     env:

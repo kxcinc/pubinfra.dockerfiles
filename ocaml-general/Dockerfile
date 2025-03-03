@@ -1,4 +1,5 @@
 ARG OS_VERSION=24.04
+ARG NODE_VERSION=latest
 
 FROM ubuntu:$OS_VERSION
 
@@ -21,9 +22,12 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
   && apt-get clean \
   && rm -rf /var/lib/apt/lists/*
 
-# bun, node.js, and yarn
+WORKDIR /root
+
+  # bun, node.js, and yarn
 RUN curl -fsSL https://bun.sh/install | bash
-RUN bun install -g n yarn && n $NODE_VERSION
+ENV PATH="$PATH:/root/.bun/bin"
+RUN bun install -g n yarn && bunx n install $NODE_VERSION
 
 # install the latest version of opam
 RUN bash -c "mkdir opam-tmp && cd opam-tmp && sh <(curl -fsSL https://opam.ocaml.org/install.sh) --download-only && find . && install opam-* /usr/local/bin/opam && cd .. && rm -rf opam-tmp"
@@ -43,6 +47,5 @@ ENV DEBIAN_FRONTEND=
 ENV OPAMROOT=/root/.opam
 ENV OPAMROOTISOK=1
 
-WORKDIR /root
 ENTRYPOINT ["/usr/local/bin/opam", "exec", "--"]
 CMD ["/usr/bin/bash"]
