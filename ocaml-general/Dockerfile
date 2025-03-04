@@ -4,7 +4,7 @@ FROM ubuntu:$OS_VERSION
 
 ENV DEBIAN_FRONTEND=noninteractive
 
-# NB: first line of dependencies is taken from ocaml/opam:ubuntu-24.04-ocaml-5.3
+# NB: first line of dependencies is to match that of ocaml/opam:ubuntu-24.04-ocaml-5.3
 RUN apt-get update && apt-get install -y --no-install-recommends \
   build-essential curl git rsync sudo unzip nano libcap-dev libx11-dev bubblewrap \
   netbase \
@@ -23,13 +23,12 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
 
 WORKDIR /root
 
-  # bun, node.js, and yarn
+ARG NODE_VERSION=latest
+
+# bun, node.js, and yarn
 RUN curl -fsSL https://bun.sh/install | bash
 ENV PATH="$PATH:/root/.bun/bin"
-RUN bun install -g n yarn
-
-ARG NODE_VERSION=latest
-RUN n install $NODE_VERSION
+RUN bun install -g n yarn && n install $NODE_VERSION
 
 # install the latest version of opam
 RUN bash -c "mkdir opam-tmp && cd opam-tmp && sh <(curl -fsSL https://opam.ocaml.org/install.sh) --download-only && find . && install opam-* /usr/local/bin/opam && cd .. && rm -rf opam-tmp"
