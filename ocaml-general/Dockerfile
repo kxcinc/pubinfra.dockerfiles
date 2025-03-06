@@ -20,7 +20,6 @@ RUN DEBIAN_FRONTEND=noninteractive apt-get update && \
   clang \
   cmake \
   curl \
-  openssh \
   git \
   git-lfs \
   libpq-dev \
