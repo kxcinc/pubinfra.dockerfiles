@@ -8,20 +8,20 @@ packages=(
   bisect_ppx.2.8.3
   ppx_deriving.6.0.3
   js_of_ocaml.6.0.1 js_of_ocaml-ppx.6.0.1 js_of_ocaml-lwt.6.0.1
-  sexplib.v0.17.0 ppx_sexp_conv.v0.17.0
-  yojson.2.2.2 ppx_yojson_conv.v0.17.0
+  sexplib.v0.16.0 ppx_sexp_conv.v0.16.0
+  yojson.2.2.2 ppx_yojson_conv.v0.16.0
   jsonm.1.0.2
   ezjsonm.1.3.0
-  ppx_optcomp.v0.17.0
+  ppx_optcomp.v0.16.0
   brr.0.0.7
   prr.0.1.1
   zed.3.2.3
   tezt.4.2.0
-  melange.5.0.0-414
-  ppx_inline_test.v0.17.0
+  melange.5.0.1-414
+  ppx_inline_test.v0.16.1
   alcotest.1.8.0
-  qcheck.0.23
-  qcheck-alcotest.0.23
+  qcheck.0.24
+  qcheck-alcotest.0.24
 )
 
 pins=(

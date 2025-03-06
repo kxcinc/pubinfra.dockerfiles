@@ -17,12 +17,12 @@ packages=(
   zed.3.2.3
   ppx_inline_test.v0.17.0
   alcotest.1.8.0
-  qcheck.0.23
-  qcheck-alcotest.0.23
+  qcheck.0.24
+  qcheck-alcotest.0.24
   sexplib.v0.17.0 ppx_sexp_conv.v0.17.0
   yojson.2.2.2 ppx_yojson_conv.v0.17.0
   tezt.4.2.0
-  melange.5.0.0-51
+  melange.5.0.1-51
   uuidm.0.9.9
   bigstringaf.0.10.0
   angstrom.0.16.1
