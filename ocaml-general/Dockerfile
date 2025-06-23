@@ -40,6 +40,7 @@ RUN bun install -g n yarn && n install $NODE_VERSION
 RUN bash -c "mkdir opam-tmp && cd opam-tmp && sh <(curl -fsSL https://opam.ocaml.org/install.sh) --download-only && find . && install opam-* /usr/local/bin/opam && cd .. && rm -rf opam-tmp"
 
 ## opam switch setup
+RUN opam repository add --all-switches --set-default archive git+https://github.com/ocaml/opam-repository-archive
 RUN opam init --auto-setup --yes --bare --disable-sandboxing
 RUN opam update
 RUN opam switch create $OCAML_VERSION
