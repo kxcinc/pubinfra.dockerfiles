@@ -101,8 +101,8 @@ jobs:
           - amd64
           - arm64
         node-version:
-          - iron # v20 Active LTS
-          - jod # v22 Active LTS
+          - jod # v22 Maintenance LTS
+          - krypton # v24 Active LTS
           - latest
         os:
           - ubuntu.22.04
