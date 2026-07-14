@@ -30,7 +30,7 @@ packages=(
 )
 
 pins=(
-  dune 3.17.2
+  dune 3.18.2
   dune-action-plugin 3.17.2
   dune-build-info 3.17.2
   dune-configurator 3.17.2
