@@ -1,17 +1,17 @@
 #!/bin/bash -xe
 
 packages=(
-  dune.3.17.2
+  dune.3.18.2
   dune-build-info.3.17.2
   merlin
-  odoc.2.4.4
-  ppxlib.0.35.0
+  odoc.3.2.1
+  ppxlib.0.38.0
   bisect_ppx.2.8.3
-  ppx_deriving.6.0.3
+  ppx_deriving.6.1.2
   js_of_ocaml.6.0.1 js_of_ocaml-ppx.6.0.1 js_of_ocaml-lwt.6.0.1
   jsonm.1.0.2
   ezjsonm.1.3.0
-  ppx_optcomp.v0.17.0
+  ppx_optcomp.v0.17.1
   brr.0.0.7
   prr.0.1.1
   zed.3.2.3
@@ -22,7 +22,7 @@ packages=(
   sexplib.v0.17.0 ppx_sexp_conv.v0.17.0
   yojson.2.2.2 ppx_yojson_conv.v0.17.0
   tezt.4.2.0
-  melange.5.0.1-53
+  melange.7.0.0-55
   uuidm.0.9.9
   bigstringaf.0.10.0
   angstrom.0.16.1
