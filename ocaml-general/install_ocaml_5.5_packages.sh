@@ -1,26 +1,25 @@
 #!/bin/bash -xe
 
 packages=(
-  dune.3.18.2
-  dune-build-info.3.17.2
+  dune.3.21.1
+  dune-build-info.3.21.1
   merlin
   odoc.3.2.1
   ppxlib.0.38.0
-  bisect_ppx.2.8.3
   ppx_deriving.6.1.2
-  js_of_ocaml.6.0.1 js_of_ocaml-ppx.6.0.1 js_of_ocaml-lwt.6.0.1
+  js_of_ocaml.6.4.1 js_of_ocaml-ppx.6.4.1 js_of_ocaml-lwt.6.4.1
   jsonm.1.0.2
   ezjsonm.1.3.0
   ppx_optcomp.v0.17.1
   brr.0.0.7
   prr.0.1.1
   zed.3.2.3
-  ppx_inline_test.v0.17.0
+  ppx_inline_test.v0.17.1
   alcotest.1.8.0
-  qcheck.0.24
-  qcheck-alcotest.0.24
-  sexplib.v0.17.0 ppx_sexp_conv.v0.17.0
-  yojson.2.2.2 ppx_yojson_conv.v0.17.0
+  qcheck.0.91
+  qcheck-alcotest.0.91
+  sexplib.v0.17.0 ppx_sexp_conv.v0.17.1
+  yojson.2.2.2 ppx_yojson_conv.v0.17.1
   tezt.4.2.0
   melange.7.0.0-55
   uuidm.0.9.9
@@ -30,15 +29,15 @@ packages=(
 )
 
 pins=(
-  dune 3.18.2
-  dune-action-plugin 3.17.2
-  dune-build-info 3.17.2
-  dune-configurator 3.17.2
-  dune-glob 3.17.2
-  dune-private-libs 3.17.2
-  dune-rpc 3.17.2
-  dune-rpc-lwt 3.17.2
-  dune-site 3.17.2
+  dune 3.21.1
+  dune-action-plugin 3.21.1
+  dune-build-info 3.21.1
+  dune-configurator 3.21.1
+  dune-glob 3.21.1
+  dune-private-libs 3.21.1
+  dune-rpc 3.21.1
+  dune-rpc-lwt 3.21.1
+  dune-site 3.21.1
 )
 
 echo "${pins[@]}" | xargs -n 2 opam pin -n add
