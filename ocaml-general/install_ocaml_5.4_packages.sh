@@ -22,7 +22,7 @@ packages=(
   yojson.2.2.2 ppx_yojson_conv.v0.17.1
   tezt.4.2.0
   melange.6.0.1-54
-  uuidm.0.9.9
+  uuidm.0.9.10
   bigstringaf.0.10.0
   angstrom.0.16.1
   uri.4.4.0
