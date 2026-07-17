@@ -6,10 +6,10 @@
 
 1. Add a new install script to the [ocaml-general/](../../ocaml-general/) directory.
 2. Create a new opam switch locally. (e.g. `opam switch create 5.4.0`)
-3. Run [scripts/check_install_ocaml.sh](../../scripts/check_install_ocaml.sh); the installation succeeds if there are no problems with the individual package versions.
+3. Run [scripts/check_install_ocaml.sh](../../scripts/check_install_ocaml.sh) with the OCaml version; the installation succeeds if there are no problems with the individual package versions.
 
    ```console
-   $ ./scripts/check_install_ocaml.sh 5.4
+   $ ./scripts/check_install_ocaml.sh 5.4.1
    ```
 
    > [!NOTE]
@@ -25,7 +25,7 @@ Switch to the opam switch for the target version, then verify with the check scr
 
 ```console
 $ opam switch <switch-name>
-$ ./scripts/check_install_ocaml.sh 5.4
+$ ./scripts/check_install_ocaml.sh 5.4.1
 ```
 
 ### Verifying inside a Docker container

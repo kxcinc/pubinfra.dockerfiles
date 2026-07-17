@@ -86,6 +86,6 @@ echo "==> running check_install_ocaml.sh inside $image"
 docker run --rm \
   --volume "$repo_root:/repo:ro" \
   "$image" \
-  bash /repo/scripts/check_install_ocaml.sh "$script_version"
+  bash /repo/scripts/check_install_ocaml.sh "$version"
 
 echo "==> OK: docker install test passed for OCaml $version"

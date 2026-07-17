@@ -1,19 +1,18 @@
 #!/usr/bin/env bash
 
-## Runs an ocaml-general package install script with strict error checking,
-## then verifies that every package listed in the script is actually
-## installed in the current opam switch.
+## Runs the ocaml-general package install script for the given OCaml version
+## with strict error checking, then verifies that every package listed in the
+## script is actually installed in the current opam switch.
 ##
 ## The install scripts themselves can appear to succeed even when some
 ## installation step fails (e.g. when invoked as `bash <script>` the shebang
 ## flags `-xe` are ignored), so use this script to validate them.
 ##
 ## usage:
-##   ./scripts/check_install_ocaml.sh <ocaml-version|install-script-path>
+##   ./scripts/check_install_ocaml.sh <ocaml-version>
 ## examples:
-##   ./scripts/check_install_ocaml.sh 5.4
 ##   ./scripts/check_install_ocaml.sh 5.4.1
-##   ./scripts/check_install_ocaml.sh ocaml-general/install_ocaml_5.4_packages.sh
+##   ./scripts/check_install_ocaml.sh 4.14.2
 
 set -euo pipefail
 
@@ -28,13 +27,9 @@ if [[ $# -ne 1 ]]; then
   exit 2
 fi
 
-# resolve the install script from a version number or a path
-if [[ -f $1 ]]; then
-  install_script=$1
-else
-  version=$(echo "$1" | cut -d'.' -f1-2)
-  install_script="$repo_root/ocaml-general/install_ocaml_${version}_packages.sh"
-fi
+# derive the install script path from the major.minor part of the version
+script_version=$(echo "$1" | cut -d'.' -f1-2)
+install_script="$repo_root/ocaml-general/install_ocaml_${script_version}_packages.sh"
 
 if [[ ! -f $install_script ]]; then
   echo "error: install script not found: $install_script" >&2
@@ -43,12 +38,11 @@ if [[ ! -f $install_script ]]; then
 fi
 
 # guard against running against a switch with a mismatched OCaml version
-script_version=$(basename "$install_script" | sed -n 's/^install_ocaml_\(.*\)_packages\.sh$/\1/p')
 switch_ocaml=$(opam exec -- ocamlc -vnum)
-if [[ -n $script_version && ${switch_ocaml%.*} != "$script_version" ]]; then
+if [[ ${switch_ocaml%.*} != "$script_version" ]]; then
   echo "error: current opam switch '$(opam switch show)' has OCaml $switch_ocaml," \
        "but $(basename "$install_script") is for OCaml $script_version" >&2
-  echo "hint: switch first, e.g. 'opam switch create $script_version.0' or 'opam switch <name>'" >&2
+  echo "hint: switch first, e.g. 'opam switch create $1' or 'opam switch <name>'" >&2
   exit 2
 fi
 
