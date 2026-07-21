@@ -37,9 +37,11 @@ $ ./scripts/check_install_ocaml.sh 5.4.1
 To verify without touching any local opam switch, use
 [scripts/test_install_ocaml_docker.sh](../../scripts/test_install_ocaml_docker.sh).
 It builds [ocaml-general/Dockerfile](../../ocaml-general/Dockerfile) for the target
-version (the build fails if the installation fails), and then runs
+version, and then runs
 [check_install_ocaml.sh](../../scripts/check_install_ocaml.sh) inside the container
-to verify that every package is installed at the specified version.
+to verify that every package is installed at the specified version. Note that a
+failed `opam install` does not fail the docker build itself, so this in-container
+verification is what actually catches installation failures.
 
 ```console
 $ ./scripts/test_install_ocaml_docker.sh 5.4.1

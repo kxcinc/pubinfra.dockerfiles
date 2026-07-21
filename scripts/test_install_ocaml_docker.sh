@@ -70,7 +70,8 @@ fi
 if [[ -z $image ]]; then
   image="ocaml-general-test:$version"
   echo "==> building $image (OCAML_VERSION=$version)"
-  # a failed package installation fails the docker build, hence this script
+  # NB: a failed `opam install` does not fail this build (the install scripts
+  # swallow it); the docker run below is what validates the installation
   docker build \
     --build-arg OCAML_VERSION="$version" \
     --build-arg PACKAGE_INSTALL_SCRIPT_FILENAME="$install_script_filename" \

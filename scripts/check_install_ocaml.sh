@@ -7,9 +7,10 @@
 ## If the current opam switch does not match the given version, offers to
 ## create (or select) the opam switch for that version first.
 ##
-## The install scripts themselves can appear to succeed even when some
-## installation step fails (e.g. when invoked as `bash <script>` the shebang
-## flags `-xe` are ignored), so use this script to validate them.
+## The install scripts themselves can appear to succeed even when `opam
+## install` fails: the failure happens inside an `... && opam clean` list,
+## which `set -e` does not abort on. This script therefore verifies the
+## installed packages after the run instead of trusting the exit status.
 ##
 ## usage:
 ##   ./scripts/check_install_ocaml.sh <ocaml-version>
