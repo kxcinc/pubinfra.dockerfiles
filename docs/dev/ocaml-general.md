@@ -5,26 +5,30 @@
 ### When no install script exists yet for the corresponding major version
 
 1. Add a new install script to the [ocaml-general/](../../ocaml-general/) directory.
-2. Create a new opam switch locally. (e.g. `opam switch create 5.4.0`)
-3. Run [scripts/check_install_ocaml.sh](../../scripts/check_install_ocaml.sh) with the OCaml version; the installation succeeds if there are no problems with the individual package versions.
+2. Run [scripts/check_install_ocaml.sh](../../scripts/check_install_ocaml.sh) with the OCaml version; the installation succeeds if there are no problems with the individual package versions.
 
    ```console
    $ ./scripts/check_install_ocaml.sh 5.4.1
    ```
+
+   The script asks for confirmation (`[y/N]`) before proceeding; if the current
+   opam switch does not match the given version, it offers to create (or select)
+   the opam switch for that version first. Set `CHECK_INSTALL_OCAML_YES=1` to
+   answer the prompt automatically (for CI / non-interactive use).
 
    > [!NOTE]
    > Running an install script directly can appear to succeed overall even when
    > an installation step fails along the way. The check script makes the whole
    > run fail on any error, and additionally verifies that every package listed
    > in `packages` is actually installed in the current switch.
-4. If it fails, search for the affected packages on [opam](https://opam.ocaml.org/packages/) and update them to versions that are mutually consistent.
+3. If it fails, search for the affected packages on [opam](https://opam.ocaml.org/packages/) and update them to versions that are mutually consistent.
 
 ### When updating package versions in an existing install script
 
-Switch to the opam switch for the target version, then verify with the check script in the same way.
+Verify with the check script in the same way; it offers to create/select the
+opam switch for the target version if needed.
 
 ```console
-$ opam switch <switch-name>
 $ ./scripts/check_install_ocaml.sh 5.4.1
 ```
 

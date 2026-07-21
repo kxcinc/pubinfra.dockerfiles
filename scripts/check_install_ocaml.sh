@@ -4,6 +4,9 @@
 ## with strict error checking, then verifies that every package listed in the
 ## script is actually installed in the current opam switch.
 ##
+## If the current opam switch does not match the given version, offers to
+## create (or select) the opam switch for that version first.
+##
 ## The install scripts themselves can appear to succeed even when some
 ## installation step fails (e.g. when invoked as `bash <script>` the shebang
 ## flags `-xe` are ignored), so use this script to validate them.
@@ -13,6 +16,10 @@
 ## examples:
 ##   ./scripts/check_install_ocaml.sh 5.4.1
 ##   ./scripts/check_install_ocaml.sh 4.14.2
+##
+## environment:
+##   CHECK_INSTALL_OCAML_YES=1   answer "y" to the confirmation prompt
+##                               automatically (for CI / non-interactive use)
 
 set -euo pipefail
 
@@ -27,8 +34,10 @@ if [[ $# -ne 1 ]]; then
   exit 2
 fi
 
+version=$1
+
 # derive the install script path from the major.minor part of the version
-script_version=$(echo "$1" | cut -d'.' -f1-2)
+script_version=$(echo "$version" | cut -d'.' -f1-2)
 install_script="$repo_root/ocaml-general/install_ocaml_${script_version}_packages.sh"
 
 if [[ ! -f $install_script ]]; then
@@ -37,13 +46,37 @@ if [[ ! -f $install_script ]]; then
   exit 2
 fi
 
-# guard against running against a switch with a mismatched OCaml version
-switch_ocaml=$(opam exec -- ocamlc -vnum)
-if [[ ${switch_ocaml%.*} != "$script_version" ]]; then
-  echo "error: current opam switch '$(opam switch show)' has OCaml $switch_ocaml," \
-       "but $(basename "$install_script") is for OCaml $script_version" >&2
-  echo "hint: switch first, e.g. 'opam switch create $1' or 'opam switch <name>'" >&2
-  exit 2
+# decide whether the opam switch for the given version needs to be set up
+switch_ocaml=$(opam exec -- ocamlc -vnum 2>/dev/null || true)
+
+if [[ -n $switch_ocaml && ${switch_ocaml%.*} == "$script_version" ]]; then
+  target_switch=""
+  prompt="install the packages of $(basename "$install_script") into the current opam switch '$(opam switch show)' (OCaml $switch_ocaml)?"
+else
+  target_switch=$version
+  prompt="create/select opam switch '$version' and install the packages of $(basename "$install_script") into it?"
+fi
+
+# [y/N] gate; CHECK_INSTALL_OCAML_YES=1 (or y/yes) skips the prompt (for CI)
+if [[ ${CHECK_INSTALL_OCAML_YES:-} =~ ^([1yY]|[yY][eE][sS])$ ]]; then
+  echo "==> proceeding without prompt (CHECK_INSTALL_OCAML_YES=${CHECK_INSTALL_OCAML_YES})"
+else
+  read -r -p "==> ${prompt} [y/N] " answer || answer=""
+  if [[ ! $answer =~ ^([yY]|[yY][eE][sS])$ ]]; then
+    echo "aborted" >&2
+    exit 1
+  fi
+fi
+
+if [[ -n $target_switch ]]; then
+  if opam switch list --short 2>/dev/null | grep -qxF "$target_switch"; then
+    echo "==> selecting existing opam switch $target_switch"
+    opam switch set "$target_switch"
+  else
+    echo "==> creating opam switch $target_switch"
+    opam switch create "$target_switch"
+  fi
+  switch_ocaml=$(opam exec -- ocamlc -vnum)
 fi
 
 echo "==> current opam switch: $(opam switch show) (OCaml $switch_ocaml)"

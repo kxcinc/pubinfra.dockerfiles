@@ -85,6 +85,7 @@ fi
 echo "==> running check_install_ocaml.sh inside $image"
 docker run --rm \
   --volume "$repo_root:/repo:ro" \
+  --env CHECK_INSTALL_OCAML_YES=1 \
   "$image" \
   bash /repo/scripts/check_install_ocaml.sh "$version"
 
