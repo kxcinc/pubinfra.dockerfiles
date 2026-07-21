@@ -105,7 +105,8 @@ for pkg in "${packages[@]}"; do
     found=$(cut -d'.' -f1 <<<"$installed" | grep -cxF "$pkg") || true
   fi
   if [[ $found -eq 0 ]]; then
-    echo "NOT INSTALLED: $pkg" >&2
+    actual=$(awk -F'.' -v n="${pkg%%.*}" '$1 == n' <<<"$installed")
+    echo "NOT INSTALLED: $pkg (installed: ${actual:-none})" >&2
     result=1
   fi
 done
