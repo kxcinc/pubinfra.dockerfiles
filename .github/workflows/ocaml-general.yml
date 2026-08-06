@@ -4,6 +4,7 @@ on:
     paths:
       - 'ocaml-general/**'
       - '!ocaml-general/README.md'
+      - 'scripts/**'
       - '.github/workflows/ocaml-general.yml'
     branches: [main]
   workflow_dispatch:
@@ -20,6 +21,7 @@ on:
     paths:
       - 'ocaml-general/**'
       - '!ocaml-general/README.md'
+      - 'scripts/**'
       - '.github/workflows/ocaml-general.yml'
   merge_group:
 
@@ -70,6 +72,8 @@ jobs:
         with:
           context: ocaml-general
           push: false
+          load: true
+          tags: ocaml-general-test:${{ matrix.ocaml-version }}
           platforms: linux/${{ matrix.arch }}
           build-args: |
             NODE_VERSION=${{ matrix.node-version }}
@@ -77,6 +81,9 @@ jobs:
             PACKAGE_INSTALL_SCRIPT_FILENAME=${{ env.PACKAGE_INSTALL_SCRIPT_FILENAME }}
           cache-from: type=local,src=${{ env.CACHE_DIR }}/.buildx-cache
           cache-to: type=local,dest=${{ env.CACHE_DIR }}/.buildx-cache-new,mode=max
+
+      - name: Verify installed packages (${{ env.DOCKER_TAG }})
+        run: ./scripts/test_install_ocaml_docker.sh --image ocaml-general-test:${{ matrix.ocaml-version }} ${{ matrix.ocaml-version }}
 
       - name: Move cache
         run: |
