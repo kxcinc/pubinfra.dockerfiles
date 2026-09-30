@@ -15,9 +15,10 @@ packages=(
   prr.0.1.1
   zed.3.2.3
   ppx_inline_test.v0.17.1
-  alcotest.1.8.0
-  qcheck.0.24
-  qcheck-alcotest.0.24
+  alcotest.1.9.1
+  alcotest-lwt.1.9.1
+  qcheck.0.25
+  qcheck-alcotest.0.25
   sexplib.v0.17.0 ppx_sexp_conv.v0.17.1
   yojson.2.2.2 ppx_yojson_conv.v0.17.1
   tezt.4.2.0
