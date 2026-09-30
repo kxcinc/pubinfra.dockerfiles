@@ -1,8 +1,8 @@
 #!/bin/bash -xe
 
 packages=(
-  dune.3.19.1
-  dune-build-info.3.19.1
+  dune.3.20.2
+  dune-build-info.3.20.2
   merlin
   odoc.3.1.0
   ppxlib.0.37.0
@@ -29,15 +29,15 @@ packages=(
 )
 
 pins=(
-  dune 3.19.1
-  dune-action-plugin 3.19.1
-  dune-build-info 3.19.1
-  dune-configurator 3.19.1
-  dune-glob 3.19.1
-  dune-private-libs 3.19.1
-  dune-rpc 3.19.1
-  dune-rpc-lwt 3.19.1
-  dune-site 3.19.1
+  dune 3.20.2
+  dune-action-plugin 3.20.2
+  dune-build-info 3.20.2
+  dune-configurator 3.20.2
+  dune-glob 3.20.2
+  dune-private-libs 3.20.2
+  dune-rpc 3.20.2
+  dune-rpc-lwt 3.20.2
+  dune-site 3.20.2
 )
 
 echo "${pins[@]}" | xargs -n 2 opam pin -n add
